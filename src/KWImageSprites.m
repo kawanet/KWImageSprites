@@ -8,12 +8,7 @@
 
 #import "KWImageSprites.h"
 
-@implementation KWImageSprites
-
-NSMutableDictionary *_cache;
-NSArray *_names;
-
-NSURL *_pathToURL(NSString *path) {
+static NSURL *pathToURL(NSString *path) {
     NSURL *url;
     if ([path characterAtIndex:0] == '/') {
         url = [NSURL fileURLWithPath:path isDirectory:NO];
@@ -24,21 +19,27 @@ NSURL *_pathToURL(NSString *path) {
     return url;
 }
 
+@implementation KWImageSprites
+{
+    NSMutableDictionary *_cache;
+    NSArray *_names;
+}
+
 - (void)loadMapWithPath:(NSString *)path error:(NSError **)errorPtr {
-    NSURL *url = _pathToURL(path);
+    NSURL *url = pathToURL(path);
     [self loadMapWithURL:url error:errorPtr];
 }
 
 - (void)loadMapWithURL:(NSURL *)url error:(NSError **)errorPtr {
     NSData *json = [NSData dataWithContentsOfURL:url options:NSDataReadingMappedIfSafe error:errorPtr];
     if (!json) return;
-
+    
     self.map = [NSJSONSerialization JSONObjectWithData:json options:NSJSONReadingMutableContainers error:errorPtr];
     _names = self.map.keyEnumerator.allObjects;
 }
 
 - (void)loadImageWithPath:(NSString *)path error:(NSError **)errorPtr {
-    NSURL *url = _pathToURL(path);
+    NSURL *url = pathToURL(path);
     [self loadImageWithURL:url error:errorPtr];
 }
 
