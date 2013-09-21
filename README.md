@@ -1,16 +1,22 @@
 KWImageSprites
 ==============
 
+KWImageSprites splits images like CSS sprite does.
+
 ## SYNOPSYS
 
 ```obj-c
-    KWImageSprites *sprites = [[KWImageSprites alloc] init];
+#import "KWImageSprites.h"
+```
 
-    NSError *err = nil;
-    [sprites loadMapWithPath:@"glyphicons-halflings.json" error:&err];
-    [sprites loadImageWithPath:@"glyphicons-halflings.png" error:&err];
+```obj-c
+KWImageSprites *sprites = [[KWImageSprites alloc] init];
 
-    UIImage *image = [sprites spriteForName:@"icon-music"];
+NSError *err = nil;
+[sprites loadMapWithPath:@"glyphicons-halflings.json" error:&err];
+[sprites loadImageWithPath:@"glyphicons-halflings.png" error:&err];
+
+UIImage *image = [sprites spriteForName:@"icon-music"];
 ```
 
 ## EXAMPLE
@@ -21,7 +27,9 @@ KWImageSprites requires a pair of sprite sheet `.png` image and sprite map `.jso
 
 ### Sprite Sheet Image
 
-The sample sprite sheet is borrowed from
+The sample application includes
+[glyphicons-halflings.png](https://raw.github.com/kawanet/KWImageSprites/master/KWImageSprites/glyphicons-halflings.png)
+sprite sheet borrowed from
 [Glyphicons](http://glyphicons.com)
 via
 [Bootstrap](https://raw.github.com/twbs/bootstrap/v2.3.2/img/glyphicons-halflings.png).
@@ -30,7 +38,9 @@ via
 
 ### Sprite Map JSON
 
-The sample sprite map is generated from
+The sample application includes
+[glyphicons-halflings.json](https://raw.github.com/kawanet/KWImageSprites/master/KWImageSprites/glyphicons-halflings.json)
+sprite map generated from
 [bootstrap.css](https://github.com/twbs/bootstrap/blob/v2.3.2/docs/assets/css/bootstrap.css)
 by
 [image-sprites](https://github.com/kawanet/image-sprites)
@@ -50,11 +60,17 @@ script.
  "icon-film": [192,0,14,14],
 ```
 
-# AUTHOR 
+## INSTALLATION
+
+```rb:Podfile
+pod 'KWImageSprites'
+```
+
+## AUTHOR
 
 Yusuke Kawasaki http://www.kawa.net/
 
-# COPYRIGHT 
+## COPYRIGHT 
 The following copyright notice applies to all the files provided in this distribution, including binary files, unless explicitly noted otherwise.
 
-    Copyright 2012-2013 Yusuke Kawasaki
+    Copyright 2013 Yusuke Kawasaki

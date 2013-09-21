@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
   s.name         = "KWImageSprites"
   s.version      = "0.0.1"
-  s.summary      = "split images like CSS sprite"
+  s.summary      = "KWImageSprites splits images like CSS sprite does"
   s.homepage     = "https://github.com/kawanet/KWImageSprites"
   s.license      = { :type => 'MIT', :file => 'LICENSE' }
   s.authors      = { "Yusuke Kawasaki" => "u-suke@kawa.net" }

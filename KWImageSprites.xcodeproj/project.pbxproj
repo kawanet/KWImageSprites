@@ -21,6 +21,9 @@
 		1D38C17517E73F9A001A263A /* glyphicons-halflings.json in Resources */ = {isa = PBXBuildFile; fileRef = 1D38C17317E73F9A001A263A /* glyphicons-halflings.json */; };
 		1D38C17617E73F9A001A263A /* glyphicons-halflings.png in Resources */ = {isa = PBXBuildFile; fileRef = 1D38C17417E73F9A001A263A /* glyphicons-halflings.png */; };
 		1D38C17917E75ADF001A263A /* KWImageSprites.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D38C17817E75ADF001A263A /* KWImageSprites.m */; };
+		1DC07B7117EDB20F00D147E2 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 1DC07B6F17EDB20F00D147E2 /* LICENSE */; };
+		1DC07B7217EDB20F00D147E2 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 1DC07B7017EDB20F00D147E2 /* README.md */; };
+		1DC07B7417EDB21400D147E2 /* KWImageSprites.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 1DC07B7317EDB21400D147E2 /* KWImageSprites.podspec */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +47,9 @@
 		1D38C17417E73F9A001A263A /* glyphicons-halflings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "glyphicons-halflings.png"; sourceTree = "<group>"; };
 		1D38C17717E75ADF001A263A /* KWImageSprites.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KWImageSprites.h; path = src/KWImageSprites.h; sourceTree = "<group>"; };
 		1D38C17817E75ADF001A263A /* KWImageSprites.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KWImageSprites.m; path = src/KWImageSprites.m; sourceTree = "<group>"; };
+		1DC07B6F17EDB20F00D147E2 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		1DC07B7017EDB20F00D147E2 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		1DC07B7317EDB21400D147E2 /* KWImageSprites.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = KWImageSprites.podspec; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +73,9 @@
 				1D38C14917E72661001A263A /* KWImageSprites */,
 				1D38C14217E72661001A263A /* Frameworks */,
 				1D38C14117E72661001A263A /* Products */,
+				1DC07B6F17EDB20F00D147E2 /* LICENSE */,
+				1DC07B7017EDB20F00D147E2 /* README.md */,
+				1DC07B7317EDB21400D147E2 /* KWImageSprites.podspec */,
 			);
 			sourceTree = "<group>";
 		};
@@ -185,6 +194,9 @@
 				1D38C15D17E72662001A263A /* MainStoryboard.storyboard in Resources */,
 				1D38C17517E73F9A001A263A /* glyphicons-halflings.json in Resources */,
 				1D38C17617E73F9A001A263A /* glyphicons-halflings.png in Resources */,
+				1DC07B7117EDB20F00D147E2 /* LICENSE in Resources */,
+				1DC07B7217EDB20F00D147E2 /* README.md in Resources */,
+				1DC07B7417EDB21400D147E2 /* KWImageSprites.podspec in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -321,6 +333,7 @@
 				1D38C16517E72662001A263A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

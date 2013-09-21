@@ -69,7 +69,6 @@
     CGFloat w = ((NSNumber *) (array[2])).floatValue;
     CGFloat h = ((NSNumber *) (array[3])).floatValue;
     CGRect rect = CGRectMake(x, y, w, h);
-    NSLog(@"%@ %.0f %.0f %.0f %.0f", name, x, y, w, h);
 
     CGImageRef cgimage = CGImageCreateWithImageInRect(self.image.CGImage, rect);
     UIImage *sprite = [UIImage imageWithCGImage:cgimage];
