@@ -63,7 +63,7 @@ script.
 ## INSTALLATION
 
 ```rb:Podfile
-pod 'KWImageSprites'
+pod 'KWImageSprites', :git => 'https://github.com/kawanet/KWImageSprites.git'
 ```
 
 ## AUTHOR
