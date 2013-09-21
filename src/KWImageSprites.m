@@ -10,71 +10,84 @@
 
 @implementation KWImageSprites
 
-- (id)init {
-    self = [super init];
-    self.cache = [[NSMutableDictionary alloc] init];
-    return self;
-}
+NSMutableDictionary *_cache;
 
-- (NSDictionary *)loadMapWithPath:(NSString *)name error:(NSError **)errorPtr {
+- (void)loadMapWithPath:(NSString *)name error:(NSError **)errorPtr {
     NSURL *resourceURL = [[NSBundle mainBundle] resourceURL];
     NSURL *url = [NSURL URLWithString:name relativeToURL:resourceURL];
-    return [self loadMapWithURL:url error:errorPtr];
+    [self loadMapWithURL:url error:errorPtr];
 }
 
-- (NSDictionary *)loadMapWithURL:(NSURL *)url error:(NSError **)errorPtr {
+- (void)loadMapWithURL:(NSURL *)url error:(NSError **)errorPtr {
     NSError *err = nil;
     NSData *json = [NSData dataWithContentsOfURL:url options:NSDataReadingMappedIfSafe error:&err];
     if (err) {
         *errorPtr = err;
-        return nil;
+        return;
     }
-
+    
     self.map = [NSJSONSerialization JSONObjectWithData:json options:NSJSONReadingMutableContainers error:&err];
     if (err) {
         *errorPtr = err;
-        return nil;
+        return ;
     }
-    return self.map;
 }
 
-- (UIImage *)loadImageWithPath:(NSString *)name error:(NSError **)errorPtr {
+- (void)loadImageWithPath:(NSString *)name error:(NSError **)errorPtr {
     NSURL *resourceURL = [[NSBundle mainBundle] resourceURL];
     NSURL *url = [NSURL URLWithString:name relativeToURL:resourceURL];
-    return [self loadImageWithURL:url error:errorPtr];
+    [self loadImageWithURL:url error:errorPtr];
 }
 
-- (UIImage *)loadImageWithURL:(NSURL *)url error:(NSError **)errorPtr {
+- (void)loadImageWithURL:(NSURL *)url error:(NSError **)errorPtr {
     NSError *err = nil;
     NSData *data = [NSData dataWithContentsOfURL:url options:NSDataReadingMappedIfSafe error:&err];
     if (err) {
         *errorPtr = err;
-        return nil;
     }
-
+    
     self.image = [UIImage imageWithData:data];
-
-    return self.image;
 }
 
 - (UIImage *)spriteForName:(NSString *)name {
-    UIImage *cache = self.cache[name];
-    if (cache) {
-        return cache;
+    NSArray *array = self.map[name];
+    if (!array || array.count < 4) {
+        return nil;
     }
-
-    NSMutableArray *array = self.map[name];
+    
     CGFloat x = ((NSNumber *) (array[0])).floatValue;
     CGFloat y = ((NSNumber *) (array[1])).floatValue;
     CGFloat w = ((NSNumber *) (array[2])).floatValue;
     CGFloat h = ((NSNumber *) (array[3])).floatValue;
     CGRect rect = CGRectMake(x, y, w, h);
+    
+    UIImage *sprite = [self spriteForRect:rect];
+    return sprite;
+}
 
+- (UIImage *)spriteForRect:(CGRect)rect {
+    // create empty dictionary if not found
+    if (!_cache) {
+        _cache = [NSMutableDictionary dictionary];
+    }
+    
+    // cache name by rectangle
+    NSString *name = [NSString stringWithFormat:@"x=%.0f&y=%.0f&w=%.0f&h=%.0f",
+                      rect.origin.x, rect.origin.y, rect.size.width, rect.size.height];
+    
+    // check cached
+    UIImage *cache = _cache[name];
+    if (cache) {
+        return cache;
+    }
+    
+    // clip an image
     CGImageRef cgimage = CGImageCreateWithImageInRect(self.image.CGImage, rect);
     UIImage *sprite = [UIImage imageWithCGImage:cgimage];
     CGImageRelease(cgimage);
 
-    self.cache[name] = sprite;
+    // cache result
+    _cache[name] = sprite;
     return sprite;
 }
 
