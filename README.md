@@ -1,9 +1,7 @@
 KWImageSprites
 ==============
 
-KWImageSprites splits images like CSS sprite does.
-
-## SYNOPSYS
+KWImageSprites clips sprites from an image like CSS-sprite.
 
 ```obj-c
 #import "KWImageSprites.h"
@@ -19,7 +17,7 @@ NSError *err = nil;
 UIImage *image = [sprites spriteForName:@"icon-music"];
 ```
 
-## EXAMPLE
+## DEMO APPLICATION
 
 KWImageSprites requires a pair of sprite sheet `.png` image and sprite map `.json` file.
 
@@ -27,8 +25,8 @@ KWImageSprites requires a pair of sprite sheet `.png` image and sprite map `.jso
 
 ### Sprite Sheet Image
 
-The sample application includes
-[glyphicons-halflings.png](https://raw.github.com/kawanet/KWImageSprites/master/KWImageSprites/glyphicons-halflings.png)
+The demo application includes
+[`glyphicons-halflings.png`](https://raw.github.com/kawanet/KWImageSprites/master/KWImageSprites/glyphicons-halflings.png)
 sprite sheet borrowed from
 [Glyphicons](http://glyphicons.com)
 via
@@ -38,8 +36,8 @@ via
 
 ### Sprite Map JSON
 
-The sample application includes
-[glyphicons-halflings.json](https://raw.github.com/kawanet/KWImageSprites/master/KWImageSprites/glyphicons-halflings.json)
+The demo application includes
+[`glyphicons-halflings.json`](https://raw.github.com/kawanet/KWImageSprites/master/KWImageSprites/glyphicons-halflings.json)
 sprite map generated from
 [bootstrap.css](https://github.com/twbs/bootstrap/blob/v2.3.2/docs/assets/css/bootstrap.css)
 by
