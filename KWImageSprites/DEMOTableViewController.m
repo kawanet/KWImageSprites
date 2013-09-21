@@ -15,7 +15,6 @@
 
 @implementation DEMOTableViewController
 
-NSArray *_list;
 KWImageSprites *sprites;
 
 - (void)viewDidLoad {
@@ -25,13 +24,10 @@ KWImageSprites *sprites;
     NSError *err = nil;
 
     [sprites loadMapWithPath:@"glyphicons-halflings.json" error:&err];
+    if (err) NSLog(@"%@", err);
+    
     [sprites loadImageWithPath:@"glyphicons-halflings.png" error:&err];
-
-    NSMutableArray *list = [[NSMutableArray alloc] init];
-    for (id key in sprites.map.keyEnumerator) {
-        [list addObject:key];
-    }
-    _list = list;
+    if (err) NSLog(@"%@", err);
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -39,19 +35,23 @@ KWImageSprites *sprites;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return _list.count;
+    return sprites.allNames.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *CellIdentifier = @"Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-
-    NSString *key = _list[indexPath.item];
-    cell.textLabel.text = key;
-    cell.imageView.image = [sprites spriteForName:key];
-
+    
+    // filename
+    NSString *name = sprites.allNames[indexPath.item];
+    cell.textLabel.text = name;
+    
+    // image
+    UIImage *image = [sprites spriteForName:name];
+    cell.imageView.image = image;
+    cell.textLabel.enabled = !!image;
+    
     return cell;
 }
-
 
 @end

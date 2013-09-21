@@ -13,12 +13,14 @@
 @property NSDictionary *map;
 @property UIImage *image;
 
-- (void)loadMapWithPath:(NSString *)name error:(NSError **)errorPtr;
+- (void)loadMapWithPath:(NSString *)path error:(NSError **)errorPtr;
 - (void)loadMapWithURL:(NSURL *)url error:(NSError **)errorPtr;
-- (void)loadImageWithPath:(NSString *)name error:(NSError **)errorPtr;
+- (void)loadImageWithPath:(NSString *)path error:(NSError **)errorPtr;
 - (void)loadImageWithURL:(NSURL *)url error:(NSError **)errorPtr;
 
+- (NSArray *)allNames;
+
 - (UIImage *)spriteForName:(NSString *)name;
-- (UIImage *)spriteForRect:(CGRect)rect ;
+- (UIImage *)spriteForRect:(CGRect)rect;
 
 @end

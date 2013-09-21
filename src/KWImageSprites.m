@@ -11,42 +11,46 @@
 @implementation KWImageSprites
 
 NSMutableDictionary *_cache;
+NSArray *_names;
 
-- (void)loadMapWithPath:(NSString *)name error:(NSError **)errorPtr {
-    NSURL *resourceURL = [[NSBundle mainBundle] resourceURL];
-    NSURL *url = [NSURL URLWithString:name relativeToURL:resourceURL];
+NSURL *_pathToURL(NSString *path) {
+    NSURL *url;
+    if ([path characterAtIndex:0] == '/') {
+        url = [NSURL fileURLWithPath:path isDirectory:NO];
+    } else {
+        url = [[NSBundle mainBundle] resourceURL];
+        url = [NSURL URLWithString:path relativeToURL:url];
+    }
+    return url;
+}
+
+- (void)loadMapWithPath:(NSString *)path error:(NSError **)errorPtr {
+    NSURL *url = _pathToURL(path);
     [self loadMapWithURL:url error:errorPtr];
 }
 
 - (void)loadMapWithURL:(NSURL *)url error:(NSError **)errorPtr {
-    NSError *err = nil;
-    NSData *json = [NSData dataWithContentsOfURL:url options:NSDataReadingMappedIfSafe error:&err];
-    if (err) {
-        *errorPtr = err;
-        return;
-    }
-    
-    self.map = [NSJSONSerialization JSONObjectWithData:json options:NSJSONReadingMutableContainers error:&err];
-    if (err) {
-        *errorPtr = err;
-        return ;
-    }
+    NSData *json = [NSData dataWithContentsOfURL:url options:NSDataReadingMappedIfSafe error:errorPtr];
+    if (!json) return;
+
+    self.map = [NSJSONSerialization JSONObjectWithData:json options:NSJSONReadingMutableContainers error:errorPtr];
+    _names = self.map.keyEnumerator.allObjects;
 }
 
-- (void)loadImageWithPath:(NSString *)name error:(NSError **)errorPtr {
-    NSURL *resourceURL = [[NSBundle mainBundle] resourceURL];
-    NSURL *url = [NSURL URLWithString:name relativeToURL:resourceURL];
+- (void)loadImageWithPath:(NSString *)path error:(NSError **)errorPtr {
+    NSURL *url = _pathToURL(path);
     [self loadImageWithURL:url error:errorPtr];
 }
 
 - (void)loadImageWithURL:(NSURL *)url error:(NSError **)errorPtr {
-    NSError *err = nil;
-    NSData *data = [NSData dataWithContentsOfURL:url options:NSDataReadingMappedIfSafe error:&err];
-    if (err) {
-        *errorPtr = err;
-    }
+    NSData *data = [NSData dataWithContentsOfURL:url options:NSDataReadingMappedIfSafe error:errorPtr];
+    if (!data) return;
     
     self.image = [UIImage imageWithData:data];
+}
+
+- (NSArray *)allNames {
+    return _names;
 }
 
 - (UIImage *)spriteForName:(NSString *)name {
@@ -85,7 +89,7 @@ NSMutableDictionary *_cache;
     CGImageRef cgimage = CGImageCreateWithImageInRect(self.image.CGImage, rect);
     UIImage *sprite = [UIImage imageWithCGImage:cgimage];
     CGImageRelease(cgimage);
-
+    
     // cache result
     _cache[name] = sprite;
     return sprite;
