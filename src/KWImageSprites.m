@@ -53,7 +53,7 @@ NSURL *_pathToURL(NSString *path) {
     return _names;
 }
 
-- (UIImage *)spriteForName:(NSString *)name {
+- (UIImage *)imageForName:(NSString *)name {
     NSArray *array = self.map[name];
     if (!array || array.count < 4) {
         return nil;
@@ -65,11 +65,11 @@ NSURL *_pathToURL(NSString *path) {
     CGFloat h = ((NSNumber *) (array[3])).floatValue;
     CGRect rect = CGRectMake(x, y, w, h);
     
-    UIImage *sprite = [self spriteForRect:rect];
+    UIImage *sprite = [self imageForRect:rect];
     return sprite;
 }
 
-- (UIImage *)spriteForRect:(CGRect)rect {
+- (UIImage *)imageForRect:(CGRect)rect {
     // create empty dictionary if not found
     if (!_cache) {
         _cache = [NSMutableDictionary dictionary];

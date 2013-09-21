@@ -14,7 +14,7 @@ NSError *err = nil;
 [sprites loadMapWithPath:@"glyphicons-halflings.json" error:&err];
 [sprites loadImageWithPath:@"glyphicons-halflings.png" error:&err];
 
-UIImage *image = [sprites spriteForName:@"icon-music"];
+UIImage *image = [sprites imageForName:@"icon-music"];
 ```
 
 ## DEMO APPLICATION

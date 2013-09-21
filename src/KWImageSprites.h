@@ -20,7 +20,7 @@
 
 - (NSArray *)allNames;
 
-- (UIImage *)spriteForName:(NSString *)name;
-- (UIImage *)spriteForRect:(CGRect)rect;
+- (UIImage *)imageForName:(NSString *)name;
+- (UIImage *)imageForRect:(CGRect)rect;
 
 @end

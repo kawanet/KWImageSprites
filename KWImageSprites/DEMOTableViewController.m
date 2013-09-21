@@ -47,7 +47,7 @@ KWImageSprites *sprites;
     cell.textLabel.text = name;
     
     // image
-    UIImage *image = [sprites spriteForName:name];
+    UIImage *image = [sprites imageForName:name];
     cell.imageView.image = image;
     cell.textLabel.enabled = !!image;
     
