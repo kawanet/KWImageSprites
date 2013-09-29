@@ -21,7 +21,7 @@ static NSURL *pathToURL(NSString *path) {
 
 @implementation KWImageSprites
 {
-    NSMutableDictionary *_cache;
+    NSCache *_cache;
 }
 
 - (void)loadMapWithPath:(NSString *)path error:(NSError **)errorPtr {
@@ -71,7 +71,7 @@ static NSURL *pathToURL(NSString *path) {
 - (UIImage *)imageForRect:(CGRect)rect {
     // create empty dictionary if not found
     if (!_cache) {
-        _cache = [NSMutableDictionary dictionary];
+        _cache = [[NSCache alloc] init];
     }
     
     // cache name by rectangle
@@ -79,7 +79,7 @@ static NSURL *pathToURL(NSString *path) {
                       rect.origin.x, rect.origin.y, rect.size.width, rect.size.height];
     
     // check cached
-    UIImage *cache = _cache[name];
+    UIImage *cache = [_cache objectForKey:name];
     if (cache) {
         return cache;
     }
@@ -90,7 +90,7 @@ static NSURL *pathToURL(NSString *path) {
     CGImageRelease(cgimage);
     
     // cache result
-    _cache[name] = sprite;
+    [_cache setObject:sprite forKey:name];
     return sprite;
 }
 
