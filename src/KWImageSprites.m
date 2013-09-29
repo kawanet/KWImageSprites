@@ -22,7 +22,6 @@ static NSURL *pathToURL(NSString *path) {
 @implementation KWImageSprites
 {
     NSMutableDictionary *_cache;
-    NSArray *_names;
 }
 
 - (void)loadMapWithPath:(NSString *)path error:(NSError **)errorPtr {
@@ -35,7 +34,6 @@ static NSURL *pathToURL(NSString *path) {
     if (!json) return;
     
     self.map = [NSJSONSerialization JSONObjectWithData:json options:NSJSONReadingMutableContainers error:errorPtr];
-    _names = self.map.keyEnumerator.allObjects;
 }
 
 - (void)loadImageWithPath:(NSString *)path error:(NSError **)errorPtr {
@@ -51,7 +49,7 @@ static NSURL *pathToURL(NSString *path) {
 }
 
 - (NSArray *)allNames {
-    return _names;
+    return self.map.allKeys;
 }
 
 - (UIImage *)imageForName:(NSString *)name {
