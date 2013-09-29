@@ -13,9 +13,9 @@
 
 @end
 
-@implementation DEMOTableViewController
-
-KWImageSprites *sprites;
+@implementation DEMOTableViewController {
+    KWImageSprites *sprites;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
