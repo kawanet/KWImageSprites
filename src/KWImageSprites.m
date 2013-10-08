@@ -24,6 +24,11 @@ static NSURL *pathToURL(NSString *path) {
     NSCache *_cache;
 }
 
+- (NSCache *)cache {
+    if (_cache) return _cache;
+    return _cache = [NSCache new];
+}
+
 - (void)loadMapWithPath:(NSString *)path error:(NSError **)errorPtr {
     NSURL *url = pathToURL(path);
     [self loadMapWithURL:url error:errorPtr];
@@ -69,20 +74,13 @@ static NSURL *pathToURL(NSString *path) {
 }
 
 - (UIImage *)imageForRect:(CGRect)rect {
-    // create empty dictionary if not found
-    if (!_cache) {
-        _cache = [[NSCache alloc] init];
-    }
-    
     // cache name by rectangle
     NSString *name = [NSString stringWithFormat:@"x=%.0f&y=%.0f&w=%.0f&h=%.0f",
                       rect.origin.x, rect.origin.y, rect.size.width, rect.size.height];
     
     // check cached
-    UIImage *cache = [_cache objectForKey:name];
-    if (cache) {
-        return cache;
-    }
+    UIImage *cached = [self.cache objectForKey:name];
+    if (cached) return cached;
     
     // clip an image
     CGImageRef cgimage = CGImageCreateWithImageInRect(self.image.CGImage, rect);
@@ -90,7 +88,7 @@ static NSURL *pathToURL(NSString *path) {
     CGImageRelease(cgimage);
     
     // cache result
-    [_cache setObject:sprite forKey:name];
+    [self.cache setObject:sprite forKey:name];
     return sprite;
 }
 
